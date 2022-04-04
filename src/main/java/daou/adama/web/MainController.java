@@ -32,42 +32,54 @@ public class MainController {
 	
 	@GetMapping("/ajouter-enqueteur") // Permet d'appeler la methode suivante lors de l'url suivante : localhost:8888/ajouter-enqueteur
 	public String AjouterEnqueter(Model model) {
+		newEnqueteur = new Enqueteur() ;
 		model.addAttribute("newEnqueteur", newEnqueteur) ;
 		return "enqueteur-ajouter" ;
 	}
 	
 	@GetMapping("/liste-enqueteur")
 	public String ListeEnqueter(Model model) {
-		allEnqueteurs = enqueteursRepository.findAll() ;
-		model.addAttribute("allEnqueteurs", allEnqueteurs) ;
+		allEnqueteurs = enqueteursRepository.findAll() ; // Recupere tous les enqueteurs dans la base de données 
+		model.addAttribute("allEnqueteurs", allEnqueteurs) ; // Envoie les enqueteir recuperé de la BD vers le html "enqueteur-liste.html"
 		return "enqueteur-liste" ;
 	}
 	
 	@PostMapping("enregistrer-enqueteur")
 	public String saveEnqueteur(@ModelAttribute Enqueteur enqueteurReçu, Model model) {
-		System.out.println(enqueteurReçu.toString());
-		enqueteursRepository.save(enqueteurReçu) ;
+		System.out.println(enqueteurReçu.toString()); 
+		enqueteursRepository.save(enqueteurReçu) ; // Permet de sauvegarder dans la base de donnees, table enqueteur
 		return ListeEnqueter(model) ;
 	}
 	
 	@GetMapping("detail-enqueteur")
 	public String detailEnqueteur(@RequestParam Long id, Model model) {
-		enqueteurDetail = enqueteursRepository.findById(id).get() ;
-		model.addAttribute("enqueteurDetail", enqueteurDetail) ;
+		enqueteurDetail = enqueteursRepository.findById(id).get() ; // Permet de faire comme en SQL : select * from enqueteur where id=id
+		model.addAttribute("enqueteurDetail", enqueteurDetail) ; // On envoie l'object enqueteur dans le html "enqueteur-detail.html"
 		return "enqueteur-detail";
 	}
 	
+	@GetMapping("modifier-enqueteur") 
+	public String modifier(Model model) {
+		model.addAttribute("newEnqueteur", enqueteurDetail) ;
+		return "enqueteur-modifier" ;
+	}
+	
+	@PostMapping("update-enqueteur")
+	public String updateEnqueteur(@ModelAttribute Enqueteur enqueteurReçu, Model model, @RequestParam Long id) {
+		enqueteurReçu.setId(id);
+		enqueteursRepository.save(enqueteurReçu) ; // Permet de sauvegarder dans la base de donnees, table enqueteur
+		return ListeEnqueter(model) ;
+	}
+	
+	@GetMapping("supprimer-enqueteur")
+	public String deleteEnqueteur(Model model) {
+		enqueteursRepository.delete(enqueteurDetail);
+		return ListeEnqueter(model) ; // Appel la methode/fonction qui affiche la liste des enqueteurs dans le html
+	}
+
+	
 	/*----------------------------------------------------*/
 	
-	@GetMapping("/ajouter-exploitant")
-	public String AjouterExploitant() {
-		return "exploitant-ajouter" ;
-	}
-	
-	@GetMapping("/liste-exploitant")
-	public String ListeExploitant() {
-		return "exploitant-liste" ;
-	}
 	
 	/*----------------------------------------------------*/
 	

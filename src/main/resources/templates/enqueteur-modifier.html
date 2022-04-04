@@ -5,7 +5,7 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Enqueteurs/</span> Ajouter un Enqueteur</h4>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Enqueteurs/</span> Modifier un Enqueteur</h4>
 
               <div class="row">
                 <div class="col-md-12">
@@ -22,7 +22,6 @@
                           width="100"
                           id="uploadedAvatar"
                         />
-                        <!--
                         <div class="button-wrapper">
                           <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                             <span class="d-none d-sm-block">Upload new photo</span>
@@ -41,39 +40,54 @@
                           </button>
 
                           <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                        </div> -->
+                        </div>
                       </div>
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
+                      <form id="formAccountSettings" method="POST" th:object="${newEnqueteur}" th:action="@{update-enqueteur(id=${newEnqueteur.id})}" >
                         <div class="row">
                           <div class="mb-3 col-md-6">
-                            <label for="firstName" class="form-label">Nom :</label>
-                            <strong th:text="${enqueteurDetail.nom}"></strong>
+                            <label for="firstName" class="form-label">Nom</label>
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="firstName"
+                              name="firstName"
+                              autofocus th:field="*{nom}"
+                            />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">Prenom(s) : </label>
-                            <strong th:text="${enqueteurDetail.prenom}"></strong>                          
+                            <label for="lastName" class="form-label">Prenom(s)</label>
+                            <input class="form-control" type="text" name="lastName" id="lastName" th:field="*{prenom}" />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="phoneNumber">Telephone : </label>
+                            <label class="form-label" for="phoneNumber">Telephone</label>
                             <div class="input-group input-group-merge">
-                              <strong th:text="${enqueteurDetail.telephone}"></strong>
+                              <span class="input-group-text">ML (+223)</span>
+                              <input
+                                type="text"
+                                id="phoneNumber"
+                                name="phoneNumber"
+                                class="form-control"
+                                placeholder="202 555 0111" th:field="*{telephone}"
+                              />
                             </div>
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="address" class="form-label">Adresse : </label>
-                            <strong th:text="${enqueteurDetail.adresse}"></strong>                          
+                            <label for="address" class="form-label">Adresse</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Adresse" th:field="*{adresse}"/>
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="age" class="form-label">Age : </label>
-                            <strong th:text="${enqueteurDetail.age}"></strong>
+                            <label for="age" class="form-label">Age</label>
+                            <input class="form-control" type="number" id="age" name="age" placeholder="Age" th:field="*{age}"/>
                           </div>
                         </div>
                         <div class="mt-2">
-                          <a th:href="@{modifier-enqueteur}" class="btn btn-primary me-2">Modifier</a>
-                          <a th:href="@{supprimer-enqueteur}" type="reset" class="btn btn-outline-danger">Supprimer</a>
+                          <button type="submit" class="btn btn-success me-2">Mettre a Jour</button>
+                          <button type="reset" class="btn btn-outline-secondary">Annuler</button>
                         </div>
+                      </form>
                     </div>
                     <!-- /Account 
                   </div>

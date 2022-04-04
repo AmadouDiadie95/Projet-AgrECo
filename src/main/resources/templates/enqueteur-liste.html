@@ -25,9 +25,10 @@
                   <tbody>
                     <tr th:each="enqueteur:${allEnqueteurs}">
                       <td>
-                        <i class="fab fa-angular fa-lg text-danger me-3"></i> <a th:href="@{detail-enqueteur(id=${enqueteur.id})}"> <strong th:text="${enqueteur.nom}"></strong> </a>
+                        <a th:href="@{detail-enqueteur(id=${enqueteur.id})}"> <strong th:text="${enqueteur.nom}"></strong> </a>
                       </td>
-                      <td th:text="${enqueteur.prenom}"></td>
+                      <td>
+                      	<a th:href="@{detail-enqueteur(id=${enqueteur.id})}"> <strong th:text="${enqueteur.prenom}"></strong> </a></td>
                       <td th:text="${enqueteur.telephone}"></td>
                       <td th:text="${enqueteur.age}"></td>
                       <td th:text="${enqueteur.adresse}"></td>
