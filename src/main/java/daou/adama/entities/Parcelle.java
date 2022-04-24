@@ -24,5 +24,5 @@ public class Parcelle {
 	private String quantiteSemence ;
 	private String etatSol ;
 	private String nbreTravailleur ;
-
+	private String coordonnees ;
 }

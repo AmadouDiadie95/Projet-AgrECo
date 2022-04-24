@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +26,12 @@ public class Enqueteur {
 	private String adresse ;
 	private int age ;
 	private String telephone ;
+	
+	@Lob // @Lob Indique a spring data que c'est un attribut qui contient enormement caractere
+	private String image;
+	
+	
+	@Lob @Transient // @Transcient indique que cet attribut n'est pas persister, donc pas de colonne dans la table 
+	private MultipartFile file ;
 
 }

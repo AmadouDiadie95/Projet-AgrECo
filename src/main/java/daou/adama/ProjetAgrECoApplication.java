@@ -18,22 +18,9 @@ public class ProjetAgrECoApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) throws Exception { // Methode qui s'execute deh le demarage de l'application avant tous le rest
 		// TODO Auto-generated method stub
-		System.out.println("************************** START *****************************");
-		Produit p1 = new Produit() ;
-		p1.setNom("fatala");
-		p1.setType("insecticide");
 		
-		Produit p2 = new Produit() ;
-		p2.setNom("Nido");
-		p2.setType("Engrais");
-		
-		System.out.println(p1.toString());
-		System.out.println(p2.toString());
-		
-		produitsRepository.save(p1) ;
-		produitsRepository.save(p2) ;
 	}
 
 }
